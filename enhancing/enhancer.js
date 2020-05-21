@@ -6,6 +6,9 @@ module.exports = {
 };
 
 function succeed(item) {
+  if(item.enhancementLevel < 20) {
+    item.enhancementLevel++
+  }
   return { ...item };
 }
 
