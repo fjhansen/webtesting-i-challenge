@@ -13,7 +13,15 @@ function succeed(item) {
 }
 
 function fail(item) {
-  return { ...item };
+  return {
+    ...item,
+    durability: item.enhancementLevel < 15 ?
+    item.durability -5 :
+    item.durability -10,
+    enhancementLevel: item.enhancementLevel > 16 ?
+    item.enhancementLevel - 1 :
+    item.enhancementLevel
+  }
 }
 
 function repair(item) {
@@ -24,3 +32,14 @@ function repair(item) {
 function get(item) {
   return { ...item };
 }
+
+// function fail(item) {
+//   if(item.enhancementLevel >= 15) {
+//     item.durability -= 10
+//   } else if (item.enhancementLevel < 15) {
+//     item.durability -= 5
+//   } else if (item.enhancementLevel > 16) {
+//     item.enhancementLevel --
+//   }
+//   return { ...item };
+// }

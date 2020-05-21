@@ -1,4 +1,4 @@
-const { repair, succeed } = require('./enhancer.js');
+const { repair, succeed, fail } = require('./enhancer.js');
 
 describe('repair', () => {
   it("should change an items durability to 100", () => {
@@ -44,22 +44,38 @@ describe('succeed', () => {
 })
 
 describe('fail', () => {
-  it('should pass when ', () => {
+  it('should decrease durability by 10 on items >= 15 enhancementLevel', () => {
     let theItem = {
-      name: 'Ebony Dagger of Hexing',
-      enhancementLevel: 19,
-      durability: 99
+      name: 'Staff of Magnus',
+      enhancementLevel: 15,
+      durability: 15
     }
 
-    let theItem2 = {
-      name: 'Elven Shortsword of Absorption',
-      enhancementLevel: 20,
-      durability: 7      
+    theItem = fail(theItem)
+    expect (theItem.durability).toBe(5)
+    
+  });
+
+  it('should decrease durability by 5 on items < 15 enhancementLevel', () => {
+    let theItem = {
+      name: 'Staff of Magnus',
+      enhancementLevel: 10,
+      durability: 10
     }
-    theItem = succeed(theItem)
-    theItem2 = succeed(theItem2)
-    expect (theItem.enhancementLevel).toBe(20)
-    expect (theItem2.enhancementLevel).toBe(20)
+
+    theItem = fail(theItem)
+    expect (theItem.durability).toBe(5)    
+  })
+
+  it('should decrease enhancementLevel by 1 on items >= 16 enhancementLevel', () => {
+    let theItem = {
+      name: 'Staff of Magnus',
+      enhancementLevel: 17,
+      durability: 10
+    }
+
+    theItem = fail(theItem)
+    expect (theItem.enhancementLevel).toBe(16)    
   })
 })
 
