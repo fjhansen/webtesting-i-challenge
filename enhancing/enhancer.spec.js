@@ -43,3 +43,23 @@ describe('succeed', () => {
   })
 })
 
+describe('fail', () => {
+  it('should pass when ', () => {
+    let theItem = {
+      name: 'Ebony Dagger of Hexing',
+      enhancementLevel: 19,
+      durability: 99
+    }
+
+    let theItem2 = {
+      name: 'Elven Shortsword of Absorption',
+      enhancementLevel: 20,
+      durability: 7      
+    }
+    theItem = succeed(theItem)
+    theItem2 = succeed(theItem2)
+    expect (theItem.enhancementLevel).toBe(20)
+    expect (theItem2.enhancementLevel).toBe(20)
+  })
+})
+
